@@ -25,7 +25,7 @@ export class LastFmApi {
     this.apiKey = apiKey;
   }
 
-  private async fetch<T>(params: Record<string, string>): Promise<T> {
+  private async fetch<T>(params: Record<string, string | number>): Promise<T> {
     const searchParams = new URLSearchParams({
       ...params,
       api_key: this.apiKey,
@@ -63,6 +63,7 @@ export class LastFmApi {
       const response = await this.fetch<SimilarArtistsResponse>({
         method: 'artist.getSimilar',
         artist: artistName,
+        autocorrect: 1,
         limit: String(limit),
       });
 
